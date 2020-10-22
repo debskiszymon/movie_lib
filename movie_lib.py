@@ -117,39 +117,36 @@ def full_season2(Series, title, year, genre, season_number, episode_number):
     genre_input = genre.title()
     season_number_input = int(season_number)
     episode_number_input = int(episode_number)
-    for i in range(episode_number_input + 1):
+    for i in range(1, episode_number_input + 1):
         Series(title=title_input, year=year_input, genre=genre_input, season_number=season_number_input, episode_number=i) 
 
-#library
-movie1 = Movie(title="Blade", year=1984, genre="Horror")
-movie2 = Movie(title="Titanic", year=1984, genre="Horror")
-movie3 = Movie(title="A Nightmare on Elm Street", year=1984, genre="Horror")
-movie4 = Movie(title="A League of Their Own", year=1984, genre="Horror")
-tv_show1 = Series(title="Friends", year=1984, genre="comedy", season_number=1, episode_number=1)
-tv_show1 = Series(title="Big Bang Theory", year=1984, genre="comedy", season_number=1, episode_number=1)
-tv_show1 = Series(title="How I Met Your Mother", year=1984, genre="comedy", season_number=1, episode_number=1)
-tv_show1 = Series(title="How I Met Your Mother", year=1984, genre="comedy", season_number=1, episode_number=2)
-tv_show1 = Series(title="How I Met Your Mother", year=1984, genre="comedy", season_number=1, episode_number=3)
-tv_show1 = Series(title="How I Met Your Mother", year=1984, genre="comedy", season_number=1, episode_number=4)
-tv_show1 = Series(title="How I Met Your Mother", year=1984, genre="comedy", season_number=1, episode_number=5)
-tv_show1 = Series(title="How I Met Your Mother", year=1984, genre="comedy", season_number=1, episode_number=6)
+
 
 if __name__ == "__main__":
+    #library
     full_season2(Series, "friends", 1990, "comedy", 5, 6)
+    full_season2(Series, "How I Met Your Mother", 1984, "comedy", 1, 6)
+    movie1 = Movie(title="Blade", year=1984, genre="Horror")
+    movie2 = Movie(title="Titanic", year=1984, genre="Horror")
+    movie3 = Movie(title="A Nightmare on Elm Street", year=1984, genre="Horror")
+    movie4 = Movie(title="A League of Their Own", year=1984, genre="Horror")
+    tv_show1 = Series(title="Friends", year=1984, genre="comedy", season_number=1, episode_number=1)
+    tv_show2 = Series(title="Big Bang Theory", year=1984, genre="comedy", season_number=1, episode_number=1)
+
     print("Biblioteka Filmów:")
-    print("Filmy")
     print("---------")
+    print("Filmy:")
     for movie in get_movies():
         print(movie)
-    print("Seriale")
     print("---------")
+    print("Seriale:")
     for series in get_series():
         print(series)
     
     ten_times()
     today = datetime.datetime.now().strftime("%d.%m.%Y")
-    print(f"Najpopularniejsze filmy i seriale dnia {today}")
     print("---------")
+    print(f"Najpopularniejsze filmy i seriale dnia {today}")
     
     top_titles2()
 
