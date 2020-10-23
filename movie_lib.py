@@ -24,7 +24,7 @@ class Movie():
         self.number_views += number
 
     def __repr__(self):
-        return f"{self.title}{self.year}{self.genre}"
+        return f"{self.title} {self.year} {self.genre}"
 
 #TV series class
 class Series(Movie):
@@ -93,8 +93,8 @@ def top_titles():
         for i in range(quant):
             print(f"{sorted_by_views[i].title} {sorted_by_views[i].number_views}")
 
-#3 top titles
-def top_titles2():
+#helper function - 3 top titles for main output
+def top_titles_automatic():
     quant = 3
     sorted_by_views = sorted(Movie.registry, key=lambda e: e.number_views, reverse=True)
     for i in range(quant):
@@ -111,7 +111,7 @@ def full_season(Series):
         Series(title=title_input, year=year_input, genre=genre_input, season_number=season_number_input, episode_number=i) 
 
 #helper function for display of library
-def full_season2(Series, title, year, genre, season_number, episode_number):
+def full_season_automatic(Series, title, year, genre, season_number, episode_number):
     title_input = title.title()
     year_input = int(year)
     genre_input = genre.title()
@@ -124,8 +124,8 @@ def full_season2(Series, title, year, genre, season_number, episode_number):
 
 if __name__ == "__main__":
     #library
-    full_season2(Series, "friends", 1990, "comedy", 5, 6)
-    full_season2(Series, "How I Met Your Mother", 1984, "comedy", 1, 6)
+    full_season_automatic(Series, "friends", 1990, "comedy", 5, 6)
+    full_season_automatic(Series, "How I Met Your Mother", 1984, "comedy", 1, 6)
     movie1 = Movie(title="Blade", year=1984, genre="Horror")
     movie2 = Movie(title="Titanic", year=1984, genre="Horror")
     movie3 = Movie(title="A Nightmare on Elm Street", year=1984, genre="Horror")
@@ -134,22 +134,23 @@ if __name__ == "__main__":
     tv_show2 = Series(title="Big Bang Theory", year=1984, genre="comedy", season_number=1, episode_number=1)
 
     print("Biblioteka Filmów:")
-    print("---------")
-    print("Filmy:")
+    print("------------------")
+    print("Filmy:\n")
     for movie in get_movies():
         print(movie)
-    print("---------")
-    print("Seriale:")
+    # print("---------")
+    print("\nSeriale:\n")
     for series in get_series():
         print(series)
     
     ten_times()
     today = datetime.datetime.now().strftime("%d.%m.%Y")
-    print("---------")
-    print(f"Najpopularniejsze filmy i seriale dnia {today}")
+    # print("---------")
+    print(f"\nNajpopularniejsze filmy i seriale dnia {today}:\n")
     
-    top_titles2()
+    top_titles_automatic()
 
+# print(Movie.registry)
 
 # search()
 
