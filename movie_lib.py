@@ -1,5 +1,6 @@
 import random
-import datetime 
+import datetime
+import utilities
 
 #Movies Class
 class Movie():
@@ -47,7 +48,7 @@ class Series(Movie):
 def get_movies():
     only_movies = []
     for i in Movie.registry:
-        if type(i) == type(movie1):
+        if isinstance(i, Movie):
             only_movies.append(i)
             only_movies = sorted(only_movies, key=lambda e: e.title.lower())
     return only_movies
@@ -56,7 +57,7 @@ def get_movies():
 def get_series():
     only_series = []
     for i in Movie.registry:
-        if type(i) == type(tv_show1):
+        if isinstance(i, Series):
             only_series.append(i)
             only_series = sorted(only_series, key=lambda e: e.title.lower())
     return only_series
@@ -93,13 +94,6 @@ def top_titles():
         for i in range(quant):
             print(f"{sorted_by_views[i].title} {sorted_by_views[i].number_views}")
 
-#helper function - 3 top titles for main output
-def top_titles_automatic():
-    quant = 3
-    sorted_by_views = sorted(Movie.registry, key=lambda e: e.number_views, reverse=True)
-    for i in range(quant):
-        print(f"{sorted_by_views[i].title} \nIlość wyświetleń: {sorted_by_views[i].number_views}")
-
 #adds full season of episodes based on prompt
 def full_season(Series):
     title_input = input("Podaj tytuł: ").title()
@@ -110,22 +104,10 @@ def full_season(Series):
     for i in range(episode_number_input + 1):
         Series(title=title_input, year=year_input, genre=genre_input, season_number=season_number_input, episode_number=i) 
 
-#helper function for display of library
-def full_season_automatic(Series, title, year, genre, season_number, episode_number):
-    title_input = title.title()
-    year_input = int(year)
-    genre_input = genre.title()
-    season_number_input = int(season_number)
-    episode_number_input = int(episode_number)
-    for i in range(1, episode_number_input + 1):
-        Series(title=title_input, year=year_input, genre=genre_input, season_number=season_number_input, episode_number=i) 
-
-
-
 if __name__ == "__main__":
     #library
-    full_season_automatic(Series, "friends", 1990, "comedy", 5, 6)
-    full_season_automatic(Series, "How I Met Your Mother", 1984, "comedy", 1, 6)
+    utilities.create_full_season(Series, "friends", 1990, "comedy", 5, 6)
+    utilities.create_full_season(Series, "How I Met Your Mother", 1984, "comedy", 1, 6)
     movie1 = Movie(title="Blade", year=1984, genre="Horror")
     movie2 = Movie(title="Titanic", year=1984, genre="Horror")
     movie3 = Movie(title="A Nightmare on Elm Street", year=1984, genre="Horror")
@@ -148,7 +130,8 @@ if __name__ == "__main__":
     # print("---------")
     print(f"\nNajpopularniejsze filmy i seriale dnia {today}:\n")
     
-    top_titles_automatic()
+    utilities.get_n_top_titles(Movie.registry)
+
 
 # print(Movie.registry)
 
